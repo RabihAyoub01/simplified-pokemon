@@ -1,1 +1,0 @@
-print("If you see this message, it means that the commit was successfull")
