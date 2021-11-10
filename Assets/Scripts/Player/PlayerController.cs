@@ -1,6 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using SQLHelper;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,13 +16,33 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
 
+    private static SQLConnector db;
+
+    private static Keyboard kb;
+
+
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();  // animation stuff
+        db = new SQLConnector();
+    }
+
+    private void Start()
+    {
+        Debug.Log("Started Game.");
     }
 
     private void Update()
     {
+        kb = InputSystem.GetDevice<Keyboard>();  // initialization of Keyboard input
+        System.Random r = new System.Random();
+
+        if (kb.spaceKey.wasPressedThisFrame)
+        {
+            SQLConnector.onPokemonCaught("Rabou3i", r.Next(50), 121, "ghassy");
+            Debug.Log("Wrote to DB.");
+        }
+
         if (!isMoving)
         {
             input.x = Input.GetAxisRaw("Horizontal");
@@ -46,7 +68,6 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Move(Vector3 targetPos)
     {
-
         isMoving = true;
 
         while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
@@ -59,7 +80,8 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
     }
 
-    private bool IsWalkable(Vector3 targetPos)
+    private bool IsWalkable(Vector3 targetPos)  // whether or not the future position would be
+        // in a collidable object.
     {
         return Physics2D.OverlapCircle(targetPos, 0.15f, solidObjectsLayer) == null;
     }
