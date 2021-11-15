@@ -38,7 +38,7 @@ public class SignUpWindow : MonoBehaviour
         string inputPassword = inputPasswordTF.text;  // string of password input in SignUpWindow.
         string inputConfirmPassword = inputConfirmPasswordTF.text;  // string of password confirm input in SignUpWindow.
 
-        // TODO: Fill the rest of the method. 
+        // TODO: This todo should be done second. Fill the rest of the method. 
     }
 
     /// <summary>
@@ -46,8 +46,9 @@ public class SignUpWindow : MonoBehaviour
     /// </summary>
     public void goBackToLoginScreen()
     {
-        // TODO: Fill in the method. Hint: similar to LoginWindow.NoAccountPressed()
+        // TODO: Third. Fill in the method. Hint: similar to LoginWindow.NoAccountPressed()
         // You should also link this method to the "Go Back to login screen" OnClick event.
+        // Don't forget to link the variables too.
     }
 
     private void OnApplicationQuit()

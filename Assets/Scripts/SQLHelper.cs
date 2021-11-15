@@ -72,7 +72,7 @@ namespace SQLHelper
         /// <param name="password">Password String of the new account.</param>
         public static void CreateAccount(string username, string password)
         {
-            //TODO: Fill in the method.
+            //TODO: This todo should be done first. Fill in the method.
         }
     }
 }
