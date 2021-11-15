@@ -39,6 +39,10 @@ public class SignUpWindow : MonoBehaviour
         string inputConfirmPassword = inputConfirmPasswordTF.text;  // string of password confirm input in SignUpWindow.
 
         // TODO: This todo should be done second. Fill the rest of the method. 
+        // You should also link this method to the CreateBTN OnClick event.
+        // Don't forget to link the variables too.
+        // Refer to the picture I sent on Discord if you're stuck.
+
     }
 
     /// <summary>
