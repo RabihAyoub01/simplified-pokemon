@@ -17,18 +17,19 @@ public class LoginWindow : MonoBehaviour
         new SQLConnector();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
+    /// <summary>
+    /// This method changes the view from Login to Signup Panel and clears the inputs.
+    /// </summary>
     public void NoAccountPressed()
     {
         inputUsernameTF.text = "";
@@ -37,6 +38,9 @@ public class LoginWindow : MonoBehaviour
         signUpPanel.SetActive(true);
     }
 
+    /// <summary>
+    /// Ignore that for now.
+    /// </summary>
     private void OnApplicationQuit()
     {
         SQLConnector.CloseConnection();

@@ -47,6 +47,7 @@ public class SignUpWindow : MonoBehaviour
     public void goBackToLoginScreen()
     {
         // TODO: Fill in the method. Hint: similar to LoginWindow.NoAccountPressed()
+        // You should also link this method to the "Go Back to login screen" OnClick event.
     }
 
     private void OnApplicationQuit()
