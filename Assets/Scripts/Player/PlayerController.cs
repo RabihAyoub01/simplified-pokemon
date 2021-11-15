@@ -18,8 +18,6 @@ public class PlayerController : MonoBehaviour
 
     private static SQLConnector db;
 
-    private static Keyboard kb;
-
 
     private void Awake()
     {
@@ -31,18 +29,9 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Started Game.");
     }
-
+    // 
     private void Update()
     {
-        kb = InputSystem.GetDevice<Keyboard>();  // initialization of Keyboard input
-        System.Random r = new System.Random();
-
-        if (kb.spaceKey.wasPressedThisFrame)
-        {
-            SQLConnector.onPokemonCaught("Rabou3i", r.Next(50), 121, "ghassy");
-            Debug.Log("Wrote to DB.");
-        }
-
         if (!isMoving)
         {
             input.x = Input.GetAxisRaw("Horizontal");
@@ -78,6 +67,12 @@ public class PlayerController : MonoBehaviour
         transform.position = targetPos;
 
         isMoving = false;
+    }
+
+    private void OnApplicationQuit()
+    {
+        SQLConnector.CloseConnection();
+        Debug.Log("Connection Closed.");
     }
 
     private bool IsWalkable(Vector3 targetPos)  // whether or not the future position would be

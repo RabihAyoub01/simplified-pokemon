@@ -10,7 +10,18 @@ namespace SQLHelper
         static MySqlConnection conn = new MySqlConnection();
         static MySqlCommand cmd = new MySqlCommand();  // this is a "cursor" that edits data
         
+        /// <summary>
+        /// In the constructor, the code calls ConnectDB() method.
+        /// </summary>
         public SQLConnector()
+        {
+            ConnectDB();
+        }
+
+        /// <summary>
+        /// Connects the code to the database.
+        /// </summary>
+        private void ConnectDB()
         {
             conn.ConnectionString = connectionString;
             cmd.Connection = conn;  // connects this cmd instance to the connectino we've established
@@ -25,14 +36,11 @@ namespace SQLHelper
             }
         }
 
-        public static void onPokemonCaught(string pokemonName, int pokemonLevel,
-            int rarity, string kek)  // this method executes when "pokemonCaught" event is fired AKA when a pokemon is caught in game.
-        {
-            string query = "INSERT INTO Pokemon VALUES('" + pokemonName +
-                "', " + pokemonLevel + ", " + rarity + ", '" + kek + "')";
-            ExecuteQuery(query);
-        }
-
+        /// <summary>
+        /// This method executes a querry in form of string. It handles Exceptions.'
+        /// All the methods for the SQL querries will be using this method. 
+        /// </summary>
+        /// <param name="query">The Query to be executed.</param>
         static void ExecuteQuery(string query)
         {
             cmd.CommandText = query;
@@ -45,6 +53,26 @@ namespace SQLHelper
             {
                 Console.WriteLine("An Error occured: " + ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Closes connection.
+        /// </summary>
+        public static void CloseConnection()
+        {
+            conn.Close();
+        }
+
+        // <---- Start of methods for SQL querries ---->
+
+        /// <summary>
+        /// Inserts new Account to Database.
+        /// </summary>
+        /// <param name="username">Username String of the new account.</param>
+        /// <param name="password">Password String of the new account.</param>
+        public static void CreateAccount(string username, string password)
+        {
+            //TODO: Fill in the method.
         }
     }
 }
