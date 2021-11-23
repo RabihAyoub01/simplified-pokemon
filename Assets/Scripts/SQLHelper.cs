@@ -73,7 +73,6 @@ namespace SQLHelper
         public static void CreateAccount(string username, string password)
         {
             ExecuteQuery($"INSERT INTO account VALUES('{username}', '{password}');");
-
         }
     }
 }

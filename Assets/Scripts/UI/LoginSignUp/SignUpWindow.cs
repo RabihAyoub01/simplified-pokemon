@@ -3,20 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using SQLHelper;
+using UICanvas;
 
 public class SignUpWindow : MonoBehaviour
 {
-    public InputField inputUsernameTF;
-    public InputField inputPasswordTF;
-    public InputField inputConfirmPasswordTF;
-
-    public GameObject loginPanel;
-    public GameObject signUpPanel;
-
     private void Awake()
     {
-        loginPanel.SetActive(true);
-        signUpPanel.SetActive(false);
+
     }
 
     void Start()
@@ -35,17 +28,15 @@ public class SignUpWindow : MonoBehaviour
     /// </summary>
     public void CreateAccountCheck()
     {
-        string inputUsername = inputUsernameTF.text;  // string of username input in SignUpWindow.
-        string inputPassword = inputPasswordTF.text;  // string of password input in SignUpWindow.
-        string inputConfirmPassword = inputConfirmPasswordTF.text;  // string of password confirm input in SignUpWindow.
-
-       
+        string inputUsername = CanvasMethods.instance.inputUsernameSignUpTF.text;  // string of username input in SignUpWindow.
+        string inputPassword = CanvasMethods.instance.inputPasswordSignUpTF.text;  // string of password input in SignUpWindow.
+        string inputConfirmPassword = CanvasMethods.instance.inputPasswordConfirmSignUpTF.text;  // string of password confirm input in SignUpWindow.
+               
         if(inputPassword == inputConfirmPassword)
         {
             SQLConnector.CreateAccount(inputUsername, inputPassword);
             Debug.Log("passwords match and account created");
         }
-
     }
 
     /// <summary>
@@ -53,16 +44,9 @@ public class SignUpWindow : MonoBehaviour
     /// </summary>
     public void goBackToLoginScreen()
     {
-        inputUsernameTF.text = "";
-        inputPasswordTF.text = "";
-        inputConfirmPasswordTF.text = "";
-        loginPanel.SetActive(true);
-        signUpPanel.SetActive(false);
-    }
-
-    private void OnApplicationQuit()
-    {
-        SQLConnector.CloseConnection();
-        Debug.Log("Connection Closed.");
+        CanvasMethods.instance.inputUsernameSignUpTF.text = "";
+        CanvasMethods.instance.inputPasswordSignUpTF.text = "";
+        CanvasMethods.instance.inputPasswordConfirmSignUpTF.text = "";
+        CanvasMethods.instance.ShowLoginScreen();
     }
 }

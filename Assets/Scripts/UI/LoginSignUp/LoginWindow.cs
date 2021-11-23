@@ -3,20 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using SQLHelper;
+using UICanvas;
 
 public class LoginWindow : MonoBehaviour
 {
-    public GameObject signUpPanel;
-    public GameObject loginPanel;
-
-    public InputField inputUsernameTF;
-    public InputField inputPasswordTF;
 
     private void Awake()
     {
-        new SQLConnector();
-        loginPanel.SetActive(true);
-        signUpPanel.SetActive(false);
+
     }
 
     void Start()
@@ -34,18 +28,8 @@ public class LoginWindow : MonoBehaviour
     /// </summary>
     public void NoAccountPressed()
     {
-        inputUsernameTF.text = "";
-        inputPasswordTF.text = "";
-        loginPanel.SetActive(false);
-        signUpPanel.SetActive(true);
-    }
-
-    /// <summary>
-    /// Ignore that for now.
-    /// </summary>
-    private void OnApplicationQuit()
-    {
-        SQLConnector.CloseConnection();
-        Debug.Log("Connection Closed.");
+        CanvasMethods.instance.inputUsernameLoginTF.text = "";
+        CanvasMethods.instance.inputPasswordLoginTF.text = "";
+        CanvasMethods.instance.ShowSignUpScreen();
     }
 }
