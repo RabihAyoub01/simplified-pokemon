@@ -15,6 +15,8 @@ public class LoginWindow : MonoBehaviour
     private void Awake()
     {
         new SQLConnector();
+        loginPanel.SetActive(true);
+        signUpPanel.SetActive(false);
     }
 
     void Start()

@@ -72,7 +72,8 @@ namespace SQLHelper
         /// <param name="password">Password String of the new account.</param>
         public static void CreateAccount(string username, string password)
         {
-            //TODO: This todo should be done first. Fill in the method.
+            ExecuteQuery($"INSERT INTO account VALUES('{username}', '{password}');");
+
         }
     }
 }

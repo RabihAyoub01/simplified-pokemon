@@ -15,7 +15,8 @@ public class SignUpWindow : MonoBehaviour
 
     private void Awake()
     {
-
+        loginPanel.SetActive(true);
+        signUpPanel.SetActive(false);
     }
 
     void Start()
@@ -38,10 +39,12 @@ public class SignUpWindow : MonoBehaviour
         string inputPassword = inputPasswordTF.text;  // string of password input in SignUpWindow.
         string inputConfirmPassword = inputConfirmPasswordTF.text;  // string of password confirm input in SignUpWindow.
 
-        // TODO: This todo should be done second. Fill the rest of the method. 
-        // You should also link this method to the CreateBTN OnClick event.
-        // Don't forget to link the variables too.
-        // Refer to the picture I sent on Discord if you're stuck.
+       
+        if(inputPassword == inputConfirmPassword)
+        {
+            SQLConnector.CreateAccount(inputUsername, inputPassword);
+            Debug.Log("passwords match and account created");
+        }
 
     }
 
@@ -50,9 +53,11 @@ public class SignUpWindow : MonoBehaviour
     /// </summary>
     public void goBackToLoginScreen()
     {
-        // TODO: Third. Fill in the method. Hint: similar to LoginWindow.NoAccountPressed()
-        // You should also link this method to the "Go Back to login screen" OnClick event.
-        // Don't forget to link the variables too.
+        inputUsernameTF.text = "";
+        inputPasswordTF.text = "";
+        inputConfirmPasswordTF.text = "";
+        loginPanel.SetActive(true);
+        signUpPanel.SetActive(false);
     }
 
     private void OnApplicationQuit()
