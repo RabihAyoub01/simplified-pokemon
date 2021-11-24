@@ -7,21 +7,6 @@ using UICanvas;
 
 public class SignUpWindow : MonoBehaviour
 {
-    private void Awake()
-    {
-
-    }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     /// <summary>
     /// This method runs when the create button is pressed in the SignUp Window.
     /// It inserts the new account in the database if the passwords and confirm passwords match.
@@ -32,7 +17,7 @@ public class SignUpWindow : MonoBehaviour
         string inputPassword = CanvasMethods.instance.inputPasswordSignUpTF.text;  // string of password input in SignUpWindow.
         string inputConfirmPassword = CanvasMethods.instance.inputPasswordConfirmSignUpTF.text;  // string of password confirm input in SignUpWindow.
                
-        if(inputPassword == inputConfirmPassword)
+        if(inputPassword == inputConfirmPassword && inputUsername != "" && inputPassword != "")
         {
             SQLConnector.CreateAccount(inputUsername, inputPassword);
             Debug.Log("passwords match and account created");

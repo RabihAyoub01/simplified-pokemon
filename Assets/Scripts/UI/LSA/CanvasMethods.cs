@@ -12,6 +12,7 @@ namespace UICanvas
 
         public GameObject signUpPanel;
         public GameObject loginPanel;
+        public GameObject adminPanel;
 
         public InputField inputUsernameLoginTF;
         public InputField inputPasswordLoginTF;
@@ -39,8 +40,9 @@ namespace UICanvas
 
         public void ShowLoginScreen()
         {
-            loginPanel.SetActive(true);
+            loginPanel.SetActive(false);
             signUpPanel.SetActive(false);
+            adminPanel.SetActive(true);
         }
 
         public void ShowSignUpScreen()

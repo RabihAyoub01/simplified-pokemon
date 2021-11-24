@@ -55,9 +55,10 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\SQLHelper.cs" />
-    <Compile Include="Assets\Scripts\UI\LoginSignUp\LoginWindow.cs" />
-    <Compile Include="Assets\Scripts\UI\LoginSignUp\SignUpWindow.cs" />
-    <Compile Include="Assets\Scripts\UI\LoginSignUp\CanvasMethods.cs" />
+    <Compile Include="Assets\Scripts\UI\LSA\CanvasMethods.cs" />
+    <Compile Include="Assets\Scripts\UI\LSA\LoginWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\LSA\SignUpWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\LSA\AdminWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

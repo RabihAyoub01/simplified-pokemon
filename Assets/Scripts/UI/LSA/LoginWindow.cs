@@ -7,22 +7,6 @@ using UICanvas;
 
 public class LoginWindow : MonoBehaviour
 {
-
-    private void Awake()
-    {
-
-    }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     /// <summary>
     /// This method changes the view from Login to Signup Panel and clears the inputs.
     /// </summary>
