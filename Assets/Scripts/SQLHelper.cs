@@ -74,5 +74,37 @@ namespace SQLHelper
         {
             ExecuteQuery($"INSERT INTO account VALUES('{username}', '{password}');");
         }
+        public static void InsertPokemon(string pokemonName, int pokemonLevel, string type1, string type2, int rarity)
+        {
+            ExecuteQuery($"INSERT INTO pokemon VALUES('{pokemonName}', '{pokemonLevel}','{type1}','{type2}','{rarity}');");
+        }
+        public static void removePokemon()
+        {
+           
+        }
+        public static void updatePokemon(string pokemonName, int pokemonLevel, string type1, string type2, int rarity)
+        {
+            
+        }
+        
+        public static void InsertAbility(string abilityName, string abilityType)
+        {
+            ExecuteQuery($"INSERT INTO pokemon VALUES('{abilityName}', '{abilityType}');");
+        }
+        public static void InsertItems(string itemName, int itemPrice, string effect)
+        {
+            ExecuteQuery($"INSERT INTO pokemon VALUES('{itemName}', '{itemPrice}','{effect}');");
+        }
+        
+        public static void InsertAccount(string username, string password)
+        {
+            ExecuteQuery($"INSERT INTO pokemon VALUES('{username}', '{password}');");
+        }
+        
+        public static void InsertTrainer(string trainerID, int level, string name)
+        {
+            ExecuteQuery($"INSERT INTO pokemon VALUES('{trainerID}', '{level}');");
+        }
+
     }
 }
