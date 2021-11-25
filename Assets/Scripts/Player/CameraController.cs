@@ -1,35 +1,24 @@
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using SQLHelper;
-using System.Collections;
 
-public class PlayerController : MonoBehaviour
+
+public class CameraController : MonoBehaviour
 {
-    
-    public float moveSpeed;
+
+    private int moveSpeed = 5;
+    private bool isMoving;
+    private Vector2 input;
     public LayerMask solidObjectsLayer;
 
-    private bool isMoving;
 
-    private Vector2 input;
-
-    private Animator animator;
-
-    private static SQLConnector db;
-
-
-    private void Awake()
+    // Use this for initialization
+    void Start()
     {
-        animator = GetComponent<Animator>();  // animation stuff
+
     }
 
-    private void Start()
-    {
-        Debug.Log("Started Game.");
-    }
-    
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
         if (!isMoving)
         {
@@ -40,9 +29,6 @@ public class PlayerController : MonoBehaviour
 
             if (input != Vector2.zero)
             {
-                animator.SetFloat("moveX", input.x);
-                animator.SetFloat("moveY", input.y);
-
                 var targetPos = transform.position;
                 targetPos.x += input.x;
                 targetPos.y += input.y;
@@ -51,7 +37,6 @@ public class PlayerController : MonoBehaviour
                     StartCoroutine(Move(targetPos));
             }
         }
-        animator.SetBool("isMoving", isMoving);
     }
 
     IEnumerator Move(Vector3 targetPos)
@@ -60,22 +45,16 @@ public class PlayerController : MonoBehaviour
 
         while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
         {
-             transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-             yield return null;
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+            yield return null;
         }
         transform.position = targetPos;
 
         isMoving = false;
     }
 
-    private void OnApplicationQuit()
-    {
-        SQLConnector.CloseConnection();
-        Debug.Log("Connection Closed. Called From Player.");
-    }
-
     private bool IsWalkable(Vector3 targetPos)  // whether or not the future position would be
-        // in a collidable object.
+                                                // in a collidable object.
     {
         return Physics2D.OverlapCircle(targetPos, 0.15f, solidObjectsLayer) == null;
     }

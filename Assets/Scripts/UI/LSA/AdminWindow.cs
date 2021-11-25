@@ -8,7 +8,7 @@ public class AdminWindow : MonoBehaviour
 {
     public GameObject attributePanel;
 
-    private void Awake()
+    void Awake()
     {
         InputField[] inputFields = attributePanel.GetComponentsInChildren<InputField>();
 
@@ -18,7 +18,7 @@ public class AdminWindow : MonoBehaviour
         }
     }
 
-    private void Start()
+    void Start()
     {
 
     }

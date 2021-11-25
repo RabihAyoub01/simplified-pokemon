@@ -32,7 +32,7 @@ namespace SQLHelper
             }
             catch (Exception ex)
             {
-                Debug.LogError("Error Occured While Connecting to Database: " + ex.Message);
+                Debug.LogError($"Error Occured While Connecting to Database: {ex.Message}");
             }
         }
 
@@ -51,7 +51,7 @@ namespace SQLHelper
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An Error occured: " + ex.Message);
+                Debug.LogError($"Error Occured While Executing Query | {query} | {ex.Message}");
             }
         }
 
@@ -74,14 +74,17 @@ namespace SQLHelper
         {
             ExecuteQuery($"INSERT INTO account VALUES('{username}', '{password}');");
         }
+
         public static void InsertPokemon(string pokemonName, int pokemonLevel, string type1, string type2, int rarity)
         {
             ExecuteQuery($"INSERT INTO pokemon VALUES('{pokemonName}', '{pokemonLevel}','{type1}','{type2}','{rarity}');");
         }
+
         public static void removePokemon()
         {
            
         }
+
         public static void updatePokemon(string pokemonName, int pokemonLevel, string type1, string type2, int rarity)
         {
             
@@ -91,6 +94,7 @@ namespace SQLHelper
         {
             ExecuteQuery($"INSERT INTO pokemon VALUES('{abilityName}', '{abilityType}');");
         }
+
         public static void InsertItems(string itemName, int itemPrice, string effect)
         {
             ExecuteQuery($"INSERT INTO pokemon VALUES('{itemName}', '{itemPrice}','{effect}');");
