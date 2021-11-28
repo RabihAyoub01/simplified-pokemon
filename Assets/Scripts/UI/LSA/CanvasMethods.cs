@@ -14,6 +14,11 @@ namespace UICanvas
         public GameObject loginPanel;
         public GameObject adminPanel;
 
+        public GameObject attributePanel;
+        public Dropdown entityDropdown;
+        public Toggle insertToggle;
+        public Toggle updateToggle;
+
         public InputField inputUsernameLoginTF;
         public InputField inputPasswordLoginTF;
 
@@ -21,16 +26,18 @@ namespace UICanvas
         public InputField inputPasswordSignUpTF;
         public InputField inputPasswordConfirmSignUpTF;
 
+
+
         void Awake()
         {
             if (instance == null) { instance = this; }
-            ShowLoginScreen();
+            Debug.Log("Canvas Initiated");
             new SQLConnector();  // Creates SQLConnector instance to open connection to DB.
         }
 
         void Start()
         {
-
+            ShowLoginScreen();
         }
 
         void Update()

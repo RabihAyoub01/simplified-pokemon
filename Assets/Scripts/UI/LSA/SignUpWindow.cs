@@ -19,7 +19,7 @@ public class SignUpWindow : MonoBehaviour
                
         if(inputPassword == inputConfirmPassword && inputUsername != "" && inputPassword != "")
         {
-            SQLConnector.CreateAccount(inputUsername, inputPassword);
+            SQLConnector.InsertAccount(inputUsername, inputPassword);
             Debug.Log("passwords match and account created");
         }
     }
