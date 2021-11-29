@@ -100,20 +100,19 @@ namespace SQLHelper
         }
 
 
-        public static void InsertPokemon(string pokemonName, int pokemonLevel, string type1, string type2, int rarity)
+        public static void InsertPokemon(string pokemonName, string type1, string type2, int baseHP, int baseATK, int baseDEF, int baseSPD)
         {
-            ExecuteQuery($"INSERT INTO pokemon VALUES('{pokemonName}', '{pokemonLevel}','{type1}','{type2}','{rarity}');");
+            ExecuteQuery($"INSERT INTO pokemon VALUES('{pokemonName}', '{type1}', '{type2}', '{baseHP}', '{baseATK}', '{baseDEF}','{baseSPD}');");
         }
 
-        public static void removePokemon()
+        public static void removePokemon(string pokemonName)
         {
-           //TODO Second. Fill in the method. Remove pokemon by pokemon Name (keyvalue of the Pokemon table)
+           // TODO 1. Fill in the method. Remove pokemon by pokemon Name (keyvalue of the Pokemon table)
         }
 
-        public static void updatePokemon(string pokemonName, int pokemonLevel, string type1, string type2, int rarity)
+        public static void updatePokemon(string pokemonName, string type1, string type2, int baseHP, int baseATK, int baseDEF, int baseSPD)
         {
-            //TODO Third.
-
+            // TODO 2. Do Update Querry: Find in the `pokemon` table a pokemon where the name is {pokemonName} and update all the attributes.
         }
 
 
@@ -130,26 +129,6 @@ namespace SQLHelper
         public static void InsertTrainer(string trainerID, int level, string name)
         {
             ExecuteQuery($"INSERT INTO trainer VALUES('{trainerID}', '{level}');");
-        }
-
-        /// <summary>
-        /// Returns a password string associated to the username.
-        /// </summary>
-        /// <param name="username">username string</param>
-        /// <returns>String of the password.</returns>
-        public static string GetPassword(string username)
-        {
-            using (var reader = GetReaderFromQuery($"SELECT * FROM account WHERE username='{username}'"))
-            {
-                // `reader` is created inside this loop and will be closed once the using loop terminates.
-                while (reader.Read())  // reads next row if available.
-                {
-                    return reader.GetString("password");  // `password` is the column name
-                                                          // so `reader.GetString("password")` returns the str
-                                                          // value of the `password` column in the current row.
-                }
-                return null;
-            }
         }
 
         /// <summary>
@@ -177,10 +156,17 @@ namespace SQLHelper
         /// <returns></returns>
         public static MySqlDataReader GetPokemonReader(string pokemonName)
         {
-            //TODO Third. using GetAccountReader() as an example, fill in the method 
-            return null;
+            // TODO 3. using GetAccountReader(string) as an example, fill in the method.
+            return null;  // change return value.
         }
 
-        
+        /// <summary>
+        /// This method returns a null value for MySqlDataReader.
+        /// </summary>
+        /// <returns>null value for a MySqlDataReader placeholder.</returns>
+        public static MySqlDataReader GetNullReader()
+        {
+            return null;
+        }
     }
 }

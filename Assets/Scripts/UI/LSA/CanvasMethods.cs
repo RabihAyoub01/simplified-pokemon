@@ -18,6 +18,7 @@ namespace UICanvas
         public Dropdown entityDropdown;
         public Toggle insertToggle;
         public Toggle updateToggle;
+        public InputField inputEntityNameTF;
 
         public InputField inputUsernameLoginTF;
         public InputField inputPasswordLoginTF;

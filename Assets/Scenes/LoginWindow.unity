@@ -1017,6 +1017,7 @@ MonoBehaviour:
   entityDropdown: {fileID: 1377210680}
   insertToggle: {fileID: 1363245532}
   updateToggle: {fileID: 1621377649}
+  inputEntityNameTF: {fileID: 889345880}
   inputUsernameLoginTF: {fileID: 1385498715}
   inputPasswordLoginTF: {fileID: 498360908}
   inputUsernameSignUpTF: {fileID: 84351625}
@@ -6284,7 +6285,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1318746970}
         m_TargetAssemblyTypeName: AdminWindow, Assembly-CSharp
         m_MethodName: MagnifierPressed
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
