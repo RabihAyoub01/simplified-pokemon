@@ -29,10 +29,7 @@ public class AdminWindow : MonoBehaviour
         inputEntityNameTF = CanvasMethods.instance.inputEntityNameTF;
         inputFields = attributePanel.GetComponentsInChildren<InputField>();
 
-        for (int i = 0; i < inputFields.Length; i++)  // u can remove that
-        {
-            inputFields[i].text = i + 1 + "";
-        }
+       
     }
 
     /// <summary>
@@ -45,56 +42,61 @@ public class AdminWindow : MonoBehaviour
     /// </summary>
     public void MagnifierPressed()
     {
-        if (updateToggle.isOn)  // Makes sure that the update is chosen.
+        int numOfAttributes = 0;  // The number of columns in the table we're fetching from.
+        string entityName = inputEntityNameTF.text;  // The name of the entity we will be looking for.
+
+        var reader = SQLConnector.GetNullReader();  // The MySqlReader instance.
+
+        switch (entityDropdown.options[entityDropdown.value].text)
         {
-            int numOfAttributes = 0;  // The number of columns in the table we're fetching from.
-            string entityName = inputEntityNameTF.text;  // The name of the entity we will be looking for.
+            case "Pokemon":
+                reader = SQLConnector.GetPokemonReader(entityName);
 
-            var reader = SQLConnector.GetNullReader();  // The MySqlReader instance.
+                numOfAttributes = 7;
+                break;
 
-            switch (entityDropdown.options[entityDropdown.value].text)
-            {
-                case "Pokemon":
-                    // TODO 4. Set the `reader` var to be the pokemon reader associated to `entityName`.
-                    // Means you have to get the reader using the method you created in TODO 3.
+            case "Item":
+                reader = SQLConnector.GetItemReader(entityName);
 
-                    // TODO 5. Set the `numOfAttributes` variable to be equal to the number of variable in the pokemon table, 7.
-                    // Yes, you just need to do `numOfAttributes = 7`.
-                    break;
+                numOfAttributes = 3;
+                break;
 
-                case "Item":
-                    break;
+            case "Ability":
+                reader = SQLConnector.GetAbilityReader(entityName);
 
-                case "Ability":
-                    break;
+                numOfAttributes = 2;
+                break;
 
-                case "Region":
-                    break;
+            case "Region":
+                reader = SQLConnector.GetRegionReader(entityName);
 
-                default:
-                    break;
-            }
+                numOfAttributes = 1;
+                break;
 
-            string[] attributes = new string[numOfAttributes];  // This is the attributes string[] array that will hold all
-                                                                // attributes values of the entity instance we found.
-                                                                // That's why `attributes.Length` = `numOfAttributes` obviously.
-            
-            if (reader.Read())  // checks if there is at least 1 row in the reader, and reads it if there is.
-            {
-                for (int i = 0; i < numOfAttributes; i++)
-                {
-                    // TODO 6. fill in attributes[i] with each `reader.GetString(i)`.
-                }
-            } 
-            else  // if there are 0 rows in the reader, means no output rows were returned from the Query.
-            {
-                Debug.Log("No Entity Found");
-            }
-
-            reader.Close();  // closes reader connection.
-
-            // TODO 7. Call the SetInputFields(string[]) function and pass attributes as argument.
+            default:
+                break;
         }
+
+        string[] attributes = new string[numOfAttributes];  // This is the attributes string[] array that will hold all
+                                                            // attributes values of the entity instance we found.
+                                                            // That's why `attributes.Length` = `numOfAttributes` obviously.
+            
+        if (reader.Read())  // checks if there is at least 1 row in the reader, and reads it if there is.
+        {
+            for (int i = 0; i < numOfAttributes; i++)
+            {
+                attributes[i]=reader.GetString(i);
+            }
+        } 
+        else  // if there are 0 rows in the reader, means no output rows were returned from the Query.
+        {
+            Debug.Log("No Entity Found");
+        }
+
+        reader.Close();  // closes reader connection.
+
+        SetInputFields(attributes);
+            
     }
 
     /// <summary>
@@ -108,22 +110,20 @@ public class AdminWindow : MonoBehaviour
         switch (entityDropdown.options[entityDropdown.value].text)  // passes the value of the dropdown to a switch
         {
             case "Pokemon":
-                // TODO 9. Fill in the "Pokemon" case of the switch statement.
-                // Don't forget to use `inputFields[].text` to get the attributes.
                 if (insertToggle.isOn)  // tests if the insert Toggle is selected
                 {
                     Debug.Log("Tried to insert Pokemon");
-                    // Call insert for pokemon.
+                    SQLConnector.InsertPokemon(inputFields[0].text, inputFields[1].text, inputFields[2].text, int.Parse(inputFields[3].text), int.Parse(inputFields[4].text), int.Parse(inputFields[5].text), int.Parse(inputFields[6].text));
                 } 
                 else if (updateToggle.isOn)  // tests if the update Toggle is selected
                 {
-                    Debug.Log("Trid to update Pokemon");
-                    // Call update for pokemon.
+                    Debug.Log("Tried to update Pokemon");
+                    SQLConnector.updatePokemon(inputFields[0].text, inputFields[1].text, inputFields[2].text, int.Parse(inputFields[3].text), int.Parse(inputFields[4].text), int.Parse(inputFields[5].text), int.Parse(inputFields[6].text));
                 }
                 else  // means Delete is selected
                 {
                     Debug.Log("Trid to delete Pokemon");
-                    // Call remove for pokemon.
+                    SQLConnector.removePokemon(inputFields[0].text);
                 }
 
                 break;
@@ -154,7 +154,7 @@ public class AdminWindow : MonoBehaviour
     {
         for (int i = 0; i < attributes.Length; i++)
         {
-            // TODO 8. use the `inputFields[]` and `attributes` arrays to complete the method.
+            inputFields[i].text = attributes[i];
         }
     }
 }
