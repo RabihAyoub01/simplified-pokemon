@@ -57,11 +57,12 @@
     <Compile Include="Assets\Scripts\SQLHelper.cs" />
     <Compile Include="Assets\Scripts\Player\CameraController.cs" />
     <Compile Include="Assets\Scripts\UI\LSA\CanvasMethods.cs" />
+    <Compile Include="Assets\Scripts\Player\UI\PauseWindow.cs" />
     <Compile Include="Assets\Scripts\UI\LSA\LoginWindow.cs" />
+    <Compile Include="Assets\Scripts\Player\UI\GameCanvas.cs" />
     <Compile Include="Assets\Scripts\UI\LSA\SignUpWindow.cs" />
     <Compile Include="Assets\Scripts\UI\LSA\AdminWindow.cs" />
-    <Compile Include="Assets\Scripts\Player\UI\GameCanvas.cs" />
-    <Compile Include="Assets\Scripts\Player\UI\PauseWindow.cs" />
+    <Compile Include="Assets\Scripts\Player\UI\BagWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

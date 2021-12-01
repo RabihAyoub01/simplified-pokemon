@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     private static SQLConnector db;
 
+    public static string username;
 
     private void Awake()
     {
@@ -78,5 +79,15 @@ public class PlayerController : MonoBehaviour
         // in a collidable object.
     {
         return Physics2D.OverlapCircle(targetPos, 0.15f, solidObjectsLayer) == null;
+    }
+
+    public static void SetInstanceUsername(string username)
+    {
+        PlayerController.username = username;
+    }
+
+    public static string GetInstanceUsername()
+    {
+        return PlayerController.username;
     }
 }

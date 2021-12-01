@@ -168,5 +168,10 @@ namespace SQLHelper
         {
             return null;
         }
+
+        public static MySqlDataReader GetItemsOwnedReader(string username)
+        {
+            return null;
+        }
     }
 }
