@@ -107,12 +107,12 @@ namespace SQLHelper
 
         public static void removePokemon(string pokemonName)
         {
-           // TODO 1. Fill in the method. Remove pokemon by pokemon Name (keyvalue of the Pokemon table)
+           ExecuteQuery($"DELETE FROM pokemon WHERE pokemonName='{pokemonName}';");
         }
 
         public static void updatePokemon(string pokemonName, string type1, string type2, int baseHP, int baseATK, int baseDEF, int baseSPD)
         {
-            // TODO 2. Do Update Querry: Find in the `pokemon` table a pokemon where the name is {pokemonName} and update all the attributes.
+            ExecuteQuery($"UPDATE pokemon SET type1='{type1}', type2='{type2}', baseHP='{baseHP}', baseATK='{baseATK}', baseDEF='{baseDEF}', baseSPD='{baseSPD}' WHERE pokemonName='{pokemonName}'; ");
         }
 
 
@@ -137,7 +137,7 @@ namespace SQLHelper
         /// <returns>A list of strings which are the existing usernames in the table.</returns>
         public static MySqlDataReader GetAccountReader(string username)
         {
-            return GetReaderFromQuery($"SELECT * FROM account WHERE username='{username}'");
+            return GetReaderFromQuery($"SELECT * FROM account WHERE username='{username}';");
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace SQLHelper
         /// <returns>A Reader of allyyyy existing usernames in the table.</returns>
         public static MySqlDataReader GetAccountReader()
         {
-            return GetReaderFromQuery($"SELECT * FROM account");
+            return GetReaderFromQuery($"SELECT * FROM account;");
         }
 
         /// <summary>
@@ -156,9 +156,24 @@ namespace SQLHelper
         /// <returns></returns>
         public static MySqlDataReader GetPokemonReader(string pokemonName)
         {
-            // TODO 3. using GetAccountReader(string) as an example, fill in the method.
-            return null;  // change return value.
+            return GetReaderFromQuery($"SELECT * FROM pokemon WHERE pokemonName='{pokemonName}';"); 
         }
+
+        public static MySqlDataReader GetItemReader(string itemName)
+        {
+            return GetReaderFromQuery($"SELECT * FROM Item WHERE itemName='{itemName}';");
+        }
+        public static MySqlDataReader GetAbilityReader(string abilityName)
+        {
+            return GetReaderFromQuery($"SELECT * FROM Ability WHERE itemName='{abilityName}';");
+        }
+
+        public static MySqlDataReader GetRegionReader(string regionName)
+        {
+            return GetReaderFromQuery($"SELECT * FROM Region WHERE itemName='{regionName}';");
+        }
+
+
 
         /// <summary>
         /// This method returns a null value for MySqlDataReader.
