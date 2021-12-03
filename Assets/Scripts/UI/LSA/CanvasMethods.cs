@@ -48,17 +48,24 @@ namespace UICanvas
 
         public void ShowLoginScreen()
         {
-            loginPanel.SetActive(false);
+            loginPanel.SetActive(true);
             signUpPanel.SetActive(false);
-            adminPanel.SetActive(true);
+            adminPanel.SetActive(false);
         }
 
         public void ShowSignUpScreen()
         {
             loginPanel.SetActive(false);
             signUpPanel.SetActive(true);
+            adminPanel.SetActive(false);
         }
 
+        public void ShowAdminScreen()
+        {
+            loginPanel.SetActive(false);
+            signUpPanel.SetActive(false);
+            adminPanel.SetActive(true);
+        }
 
         /// <summary>
         /// Closes Connection when Application Quits.

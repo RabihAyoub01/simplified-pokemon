@@ -16,7 +16,8 @@ namespace SQLHelper
         /// </summary>
         public SQLConnector()
         {
-            ConnectDB();
+            if (conn.ConnectionString == "")  // checks if connection is not already established
+                ConnectDB();
         }
 
         /// <summary>
@@ -163,6 +164,7 @@ namespace SQLHelper
         {
             return GetReaderFromQuery($"SELECT * FROM Item WHERE itemName='{itemName}';");
         }
+
         public static MySqlDataReader GetAbilityReader(string abilityName)
         {
             return GetReaderFromQuery($"SELECT * FROM Ability WHERE itemName='{abilityName}';");
@@ -172,8 +174,6 @@ namespace SQLHelper
         {
             return GetReaderFromQuery($"SELECT * FROM Region WHERE itemName='{regionName}';");
         }
-
-
 
         /// <summary>
         /// This method returns a null value for MySqlDataReader.
@@ -186,7 +186,7 @@ namespace SQLHelper
 
         public static MySqlDataReader GetItemsOwnedReader(string username)
         {
-            return null;
+            return GetReaderFromQuery($"SELECT * FROM hasItems WHERE username='{username}';");
         }
     }
 }

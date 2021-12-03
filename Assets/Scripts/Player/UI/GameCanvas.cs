@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,7 @@ namespace GameUICanvas
         public GameObject bagScrollView;
         public GameObject pokemonScrollView;
 
+        public TextMeshProUGUI menuLabel;
 
         private void Awake()
         {
@@ -26,6 +28,7 @@ namespace GameUICanvas
 
         void Start()
         {
+            menuLabel.text = $"{PlayerController.GetInstanceUsername()}'s Menu";
         }
 
         void Update()

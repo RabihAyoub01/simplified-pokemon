@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GameUICanvas;
+using UnityEngine.SceneManagement;
 
 public class PauseWindow : MonoBehaviour
 {
@@ -32,5 +33,12 @@ public class PauseWindow : MonoBehaviour
     public void ResumePressed()
     {
         GameCanvas.instance.HideAllPanels();
+    }
+
+    public void QuitPressed()
+    {
+        GameCanvas.instance.HideAllPanels();
+        PlayerController.SetInstanceUsername("user");
+        SceneManager.LoadScene("LoginWindow");
     }
 }

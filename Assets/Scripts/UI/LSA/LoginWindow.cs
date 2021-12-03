@@ -13,8 +13,7 @@ public class LoginWindow : MonoBehaviour
     /// </summary>
     public void NoAccountPressed()
     {
-        CanvasMethods.instance.inputUsernameLoginTF.text = "";
-        CanvasMethods.instance.inputPasswordLoginTF.text = "";
+        ClearInputFields();
         CanvasMethods.instance.ShowSignUpScreen();
     }
 
@@ -23,6 +22,29 @@ public class LoginWindow : MonoBehaviour
     /// </summary>
     public void LoginPressed()
     {
-        SceneManager.LoadScene("Game");
+        if (CanvasMethods.instance.inputUsernameLoginTF.text == "admin" && CanvasMethods.instance.inputPasswordLoginTF.text == "admin")
+        {
+            ClearInputFields();
+            CanvasMethods.instance.ShowAdminScreen();
+        }
+
+        using (var reader = SQLConnector.GetAccountReader(CanvasMethods.instance.inputUsernameLoginTF.text))
+        {
+            if (reader.Read() && reader.GetString("password") == CanvasMethods.instance.inputPasswordLoginTF.text )
+            {
+                PlayerController.SetInstanceUsername(CanvasMethods.instance.inputUsernameLoginTF.text);
+                SceneManager.LoadScene("Game");
+            } else
+            {
+                Debug.Log("Account not Found");
+            }
+        }
+    }
+
+    private void ClearInputFields()
+    {
+        CanvasMethods.instance.inputUsernameLoginTF.text = "";
+        CanvasMethods.instance.inputPasswordLoginTF.text = "";
     }
 }
+

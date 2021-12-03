@@ -13,7 +13,6 @@ public class AdminWindow : MonoBehaviour
     InputField inputEntityNameTF = null;
     Toggle insertToggle = null;
     Toggle updateToggle = null;
-
     
     void Awake()
     {
@@ -28,8 +27,14 @@ public class AdminWindow : MonoBehaviour
         updateToggle = CanvasMethods.instance.updateToggle;
         inputEntityNameTF = CanvasMethods.instance.inputEntityNameTF;
         inputFields = attributePanel.GetComponentsInChildren<InputField>();
+    }
 
-       
+    /// <summary>
+    /// Runs when the log out button is pressed on the admin window.
+    /// </summary>
+    public void LogOutPressed()
+    {
+        CanvasMethods.instance.ShowLoginScreen();
     }
 
     /// <summary>
@@ -74,7 +79,7 @@ public class AdminWindow : MonoBehaviour
                 break;
 
             default:
-                break;
+                return;
         }
 
         string[] attributes = new string[numOfAttributes];  // This is the attributes string[] array that will hold all
