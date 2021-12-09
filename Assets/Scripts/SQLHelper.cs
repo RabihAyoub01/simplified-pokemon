@@ -132,6 +132,12 @@ namespace SQLHelper
             ExecuteQuery($"INSERT INTO trainer VALUES('{trainerID}', '{level}');");
         }
 
+        public static void PickUp(string userID, string itemName, int quantity)
+        {
+            ExecuteQuery($"INSERT INTO hasItem VALUES('{userID}', '{itemName}',{quantity} );");
+        }
+        
+        
         /// <summary>
         /// Gets a list of all the usernames in the table.
         /// </summary>
@@ -186,7 +192,13 @@ namespace SQLHelper
 
         public static MySqlDataReader GetItemsOwnedReader(string username)
         {
-            return GetReaderFromQuery($"SELECT * FROM hasItems WHERE username='{username}';");
+            return GetReaderFromQuery($"SELECT ItemName, quantity, itemDescription FROM Items NATURAL JOIN hasItem WHERE username='{username}';");
         }
+
+        public static MySqlDataReader GetPokemonIDReader(string region)
+        {
+            return GetReaderFromQuery($"SELECT pokemonID FROM hasPokemon NATURAL JOIN Region NATURAL JOIN pokemonCopy WHERE Region.regionName='{region}';");
+        }
+
     }
 }
