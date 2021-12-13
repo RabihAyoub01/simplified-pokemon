@@ -192,7 +192,7 @@ namespace SQLHelper
 
         public static MySqlDataReader GetItemsOwnedReader(string username)
         {
-            return GetReaderFromQuery($"SELECT ItemName, quantity, itemDescription FROM Items NATURAL JOIN hasItem WHERE username='{username}';");
+            return GetReaderFromQuery($"SELECT ItemName, quantity, ItemDescription  FROM Items NATURAL JOIN hasItem WHERE username='{username}';");
         }
 
         public static MySqlDataReader GetPokemonIDReader(string region)
@@ -200,5 +200,9 @@ namespace SQLHelper
             return GetReaderFromQuery($"SELECT pokemonID FROM hasPokemon NATURAL JOIN Region NATURAL JOIN pokemonCopy WHERE Region.regionName='{region}';");
         }
 
+        public static MySqlDataReader CheckIfOwnedReader(string username)
+        {
+            return GetReaderFromQuery($"SELECT ItemName  FROM Items NATURAL JOIN hasItem WHERE username='{username}';");
+        }
     }
 }

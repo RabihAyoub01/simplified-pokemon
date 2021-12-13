@@ -6,17 +6,18 @@ using MySql.Data.MySqlClient;
 
 public class Pickup : MonoBehaviour, Interactable
 {
-    public string attribute;
-    
+    public string[] itemOwned;
+    int i=0;
 
     public void Interact()
     {
-        MySqlDataReader reader = SQLConnector.GetItemsOwnedReader(PlayerController.GetInstanceUsername());
-        while(reader.Read())
-            attribute = reader.GetString(1);
-        reader.Close();
-        Debug.Log(attribute);
-
+        MySqlDataReader reader = SQLConnector.CheckIfOwnedReader(PlayerController.GetInstanceUsername());
+        while (reader.Read())
+        {
+            itemOwned[i] = reader.GetString(i);
+            i++;
+        }
+        
         SQLConnector.PickUp(PlayerController.GetInstanceUsername(), gameObject.name, 1);
         Destroy(gameObject);
         
