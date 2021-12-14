@@ -26,7 +26,27 @@ public class BagWindow : MonoBehaviour
     {
 
     }
+    /// <summary>
+    /// Runs when Bag Window is Shown.
+    /// </summary>
+    public void OnShowBagPanel()
+    {
+        string username = PlayerController.GetInstanceUsername();
 
+        DestroyChildren(bagContent);
+        getItem();
+    }
+
+    /// <summary>
+    /// Ruthlessly Kills all children of the gameobject
+    /// </summary>
+    private void DestroyChildren(GameObject panel)
+    {
+        foreach (Transform child in panel.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
     private void ShowBag()
     {
         using (var reader = SQLConnector.GetItemsOwnedReader(username))

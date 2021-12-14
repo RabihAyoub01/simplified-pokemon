@@ -75,7 +75,7 @@ public class AdminWindow : MonoBehaviour
             case "Region":
                 reader = SQLConnector.GetRegionReader(entityName);
 
-                numOfAttributes = 1;
+                numOfAttributes = 3;
                 break;
 
             default:
@@ -110,7 +110,7 @@ public class AdminWindow : MonoBehaviour
     /// on the option of the Toggle. Moreover, it will target many tables, 
     /// depending on the option chosen from the dropdown box.
     /// </summary>
-    public void CommitPressed()
+    public void CommitPressed() 
     {
         switch (entityDropdown.options[entityDropdown.value].text)  // passes the value of the dropdown to a switch
         {
@@ -127,19 +127,64 @@ public class AdminWindow : MonoBehaviour
                 }
                 else  // means Delete is selected
                 {
-                    Debug.Log("Trid to delete Pokemon");
+                    Debug.Log("Tried to delete Pokemon");
                     SQLConnector.removePokemon(inputFields[0].text);
                 }
 
                 break;
 
             case "Item":
+                if (insertToggle.isOn)  // tests if the insert Toggle is selected
+                {
+                    Debug.Log("Tried to insert Item");
+                    SQLConnector.InsertItems(inputFields[0].text, int.Parse(inputFields[1].text), inputFields[2].text);
+                } 
+                else if (updateToggle.isOn)  // tests if the update Toggle is selected
+                {
+                    Debug.Log("Tried to update Item");
+                    SQLConnector.updateItems(inputFields[0].text, int.Parse(inputFields[1].text), inputFields[2].text);
+                }
+                else  // means Delete is selected
+                {
+                    Debug.Log("Tried to delete Item");
+                    SQLConnector.removeItem(inputFields[0].text);
+                }
                 break;
 
             case "Ability":
+                if (insertToggle.isOn)  // tests if the insert Toggle is selected
+                {
+                    Debug.Log("Tried to insert Ability");
+                    SQLConnector.InsertAbility(inputFields[0].text, inputFields[1].text);
+                }
+                else if (updateToggle.isOn)  // tests if the update Toggle is selected
+                {
+                    Debug.Log("Tried to update Ability");
+                    SQLConnector.updateAbility(inputFields[0].text, inputFields[1].text);
+                }
+                else  // means Delete is selected
+                {
+                    Debug.Log("Tried to delete Ability");
+                    SQLConnector.removeAbility(inputFields[0].text);
+                }
                 break;
 
             case "Region":
+                if (insertToggle.isOn)  // tests if the insert Toggle is selected
+                {
+                    Debug.Log("Tried to insert Region");
+                    SQLConnector.InsertRegion(inputFields[0].text, int.Parse(inputFields[1].text), int.Parse(inputFields[2].text));
+                }
+                else if (updateToggle.isOn)  // tests if the update Toggle is selected
+                {
+                    Debug.Log("Tried to update Region");
+                    SQLConnector.updateRegion(inputFields[0].text, int.Parse(inputFields[1].text), int.Parse(inputFields[2].text));
+                }
+                else  // means Delete is selected
+                {
+                    Debug.Log("Tried to delete Region");
+                    SQLConnector.removeRegion(inputFields[0].text);
+                }
                 break;
 
             default:

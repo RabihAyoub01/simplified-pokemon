@@ -11,12 +11,7 @@ public class Pickup : MonoBehaviour, Interactable
 
     public void Interact()
     {
-        MySqlDataReader reader = SQLConnector.CheckIfOwnedReader(PlayerController.GetInstanceUsername());
-        while (reader.Read())
-        {
-            itemOwned[i] = reader.GetString(i);
-            i++;
-        }
+        
         
         SQLConnector.PickUp(PlayerController.GetInstanceUsername(), gameObject.name, 1);
         Destroy(gameObject);
