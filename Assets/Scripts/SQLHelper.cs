@@ -3,6 +3,8 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 
+using Random = System.Random;
+
 namespace SQLHelper
 {
     class SQLConnector
@@ -227,9 +229,14 @@ namespace SQLHelper
         {
             return GetReaderFromQuery($"SELECT ItemName, quantity, ItemDescription  FROM Items NATURAL JOIN hasItem WHERE username='{username}';");
         }
+        public static MySqlDataReader GetLevel(string region)
+        {
+            return GetReaderFromQuery($"SELECT minLevel, maxLevel FROM Region regionName='{region}';");
+        }
 
         public static MySqlDataReader GetPokemonIDReader(string region)
         {
+            
             return GetReaderFromQuery($"SELECT pokemonID FROM hasPokemon NATURAL JOIN Region NATURAL JOIN pokemonCopy WHERE Region.regionName='{region}';");
         }
 
@@ -237,5 +244,7 @@ namespace SQLHelper
         {
             return GetReaderFromQuery($"SELECT ItemName  FROM Items NATURAL JOIN hasItem WHERE username='{username}';");
         }
+        
     }
+
 }
