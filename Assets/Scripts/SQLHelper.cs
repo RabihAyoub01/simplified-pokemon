@@ -3,6 +3,8 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 
+using Random = System.Random;
+
 namespace SQLHelper
 {
     class SQLConnector
@@ -111,20 +113,53 @@ namespace SQLHelper
            ExecuteQuery($"DELETE FROM pokemon WHERE pokemonName='{pokemonName}';");
         }
 
+        public static void removeItem(string itemName)
+        {
+            ExecuteQuery($"DELETE FROM Items WHERE itemName='{itemName}';");
+        }
+
         public static void updatePokemon(string pokemonName, string type1, string type2, int baseHP, int baseATK, int baseDEF, int baseSPD)
         {
             ExecuteQuery($"UPDATE pokemon SET type1='{type1}', type2='{type2}', baseHP='{baseHP}', baseATK='{baseATK}', baseDEF='{baseDEF}', baseSPD='{baseSPD}' WHERE pokemonName='{pokemonName}'; ");
         }
 
+        public static void updateItems(string itemName, int itemPrice, string effect)
+        {
+            ExecuteQuery($"UPDATE pokemon SET itemPrice='{itemPrice}', effect='{effect}'; ");
+        }
+
+        public static void updateAbility(string abilityName, string abilityType)
+        {
+            ExecuteQuery($"UPDATE Ability SET abilityName='{abilityName}', abilityType='{abilityType}'; ");
+        }
+
+        public static void removeAbility(string abilityName)
+        {
+            ExecuteQuery($"DELETE FROM Ability WHERE abilityName='{abilityName}';");
+        }
 
         public static void InsertAbility(string abilityName, string abilityType)
         {
             ExecuteQuery($"INSERT INTO ability VALUES('{abilityName}', '{abilityType}');");
         }
 
+        public static void InsertRegion(string regionName, int minLevel, int maxLevel)
+        {
+            ExecuteQuery($"INSERT INTO Region VALUES('{regionName}', '{minLevel}', '{maxLevel}');");
+        }
+
+        public static void updateRegion(string regionName, int minLevel, int maxLevel)
+        {
+            ExecuteQuery($"UPDATE Region SET regionName='{regionName}', minLevel='{minLevel}', maxLevel = '{maxLevel}'; ");
+        }
+        public static void removeRegion(string regionName)
+        {
+            ExecuteQuery($"DELETE FROM Region WHERE regionName='{regionName}';");
+        }
+
         public static void InsertItems(string itemName, int itemPrice, string effect)
         {
-            ExecuteQuery($"INSERT INTO items VALUES('{itemName}', '{itemPrice}','{effect}');");
+            ExecuteQuery($"INSERT INTO Items VALUES('{itemName}', '{itemPrice}','{effect}');");
         }
        
         public static void InsertTrainer(string trainerID, int level, string name)
@@ -168,17 +203,17 @@ namespace SQLHelper
 
         public static MySqlDataReader GetItemReader(string itemName)
         {
-            return GetReaderFromQuery($"SELECT * FROM Item WHERE itemName='{itemName}';");
+            return GetReaderFromQuery($"SELECT * FROM Items WHERE ItemName='{itemName}';"); 
         }
 
         public static MySqlDataReader GetAbilityReader(string abilityName)
         {
-            return GetReaderFromQuery($"SELECT * FROM Ability WHERE itemName='{abilityName}';");
+            return GetReaderFromQuery($"SELECT * FROM Ability WHERE abilityName='{abilityName}';");
         }
 
         public static MySqlDataReader GetRegionReader(string regionName)
         {
-            return GetReaderFromQuery($"SELECT * FROM Region WHERE itemName='{regionName}';");
+            return GetReaderFromQuery($"SELECT * FROM Region WHERE regionName='{regionName}' ;");
         }
 
         /// <summary>
@@ -194,9 +229,14 @@ namespace SQLHelper
         {
             return GetReaderFromQuery($"SELECT ItemName, quantity, ItemDescription  FROM Items NATURAL JOIN hasItem WHERE username='{username}';");
         }
+        public static MySqlDataReader GetLevel(string region)
+        {
+            return GetReaderFromQuery($"SELECT minLevel, maxLevel FROM Region regionName='{region}';");
+        }
 
         public static MySqlDataReader GetPokemonIDReader(string region)
         {
+            
             return GetReaderFromQuery($"SELECT pokemonID FROM hasPokemon NATURAL JOIN Region NATURAL JOIN pokemonCopy WHERE Region.regionName='{region}';");
         }
 
@@ -210,4 +250,5 @@ namespace SQLHelper
             return GetReaderFromQuery($"SELECT T.* FROM itemSoldIn S NATURAL JOIN Items T WHERE regionName='{regionName}'");
         }
     }
+
 }
