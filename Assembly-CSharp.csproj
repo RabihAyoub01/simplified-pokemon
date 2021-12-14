@@ -68,6 +68,9 @@
     <Compile Include="Assets\Scripts\UI\LSA\AdminWindow.cs" />
     <Compile Include="Assets\Scripts\Player\UI\BagWindow.cs" />
     <Compile Include="Assets\Scripts\IntObject.cs" />
+    <Compile Include="Assets\Scripts\Player\UI\ShopRowPrefabScript.cs" />
+    <Compile Include="Assets\Scripts\Player\UI\ShopWindow.cs" />
+    <Compile Include="Assets\Scripts\Player\UI\PokemonRowPrefab.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

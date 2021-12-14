@@ -21,8 +21,6 @@ public class PlayerController : MonoBehaviour
 
     public static string username;
 
-    
-
     private void Awake()
     {
         animator = GetComponent<Animator>();  // animation stuff
@@ -34,9 +32,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update()
-    {
-        
-
+    { 
         if (!isMoving)
         {
             input.x = Input.GetAxisRaw("Horizontal");
@@ -68,13 +64,11 @@ public class PlayerController : MonoBehaviour
         var interactPos=transform.position + facingDir;
 
         // Debug.DrawLine(transform.position, interactPos, Color.red, 0.5f);
-       var collider= Physics2D.OverlapCircle(interactPos, 0.3f, interactableLayer);
+        var collider= Physics2D.OverlapCircle(interactPos, 0.3f, interactableLayer);
         if (collider != null)
         {
             collider.GetComponent<Interactable>()?.Interact();
         }
-
-
     }
     IEnumerator Move(Vector3 targetPos)
     {
@@ -111,9 +105,4 @@ public class PlayerController : MonoBehaviour
     {
         return PlayerController.username;
     }
-
-
-
-    
-    
 }

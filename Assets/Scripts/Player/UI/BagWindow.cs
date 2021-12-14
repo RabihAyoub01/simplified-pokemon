@@ -16,15 +16,35 @@ public class BagWindow : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        string username = PlayerController.GetInstanceUsername();
-        //ShowBag();
-        getItem();
-       }
+
+    }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    /// <summary>
+    /// Runs when Bag Window is Shown.
+    /// </summary>
+    public void OnShowBagPanel()
+    {
+        string username = PlayerController.GetInstanceUsername();
+
+        DestroyChildren(bagContent);
+        getItem();
+    }
+
+    /// <summary>
+    /// Ruthlessly Kills all children of the gameobject
+    /// </summary>
+    private void DestroyChildren(GameObject panel)
+    {
+        foreach (Transform child in panel.transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     private void ShowBag()
@@ -42,11 +62,11 @@ public class BagWindow : MonoBehaviour
     {
         GameObject go = Instantiate(rowPrefab);
 
-        Text[] inputfields = go.GetComponentsInChildren<Text>();
+        Text[] textfields = go.GetComponentsInChildren<Text>();
 
-        inputfields[0].text = itemName;
-        inputfields[1].text = quantity;
-        inputfields[2].text = description;
+        textfields[0].text = itemName;
+        textfields[1].text = quantity;
+        textfields[2].text = description;
 
         go.transform.SetParent(bagContent.transform, false);
     }

@@ -5,10 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
 
-    private int moveSpeed = 5;
-    private bool isMoving;
-    private Vector2 input;
-    public LayerMask solidObjectsLayer;
+    public GameObject player;
 
 
     // Use this for initialization
@@ -20,42 +17,13 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isMoving)
-        {
-            input.x = Input.GetAxisRaw("Horizontal");
-            input.y = Input.GetAxisRaw("Vertical");
-
-            if (input.x != 0) input.y = 0;
-
-            if (input != Vector2.zero)
-            {
-                var targetPos = transform.position;
-                targetPos.x += input.x;
-                targetPos.y += input.y;
-
-                if (IsWalkable(targetPos))
-                    StartCoroutine(Move(targetPos));
-            }
-        }
+        //UpdatePosition();
     }
 
-    IEnumerator Move(Vector3 targetPos)
+    private void UpdatePosition()
     {
-        isMoving = true;
-
-        while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-            yield return null;
-        }
-        transform.position = targetPos;
-
-        isMoving = false;
-    }
-
-    private bool IsWalkable(Vector3 targetPos)  // whether or not the future position would be
-                                                // in a collidable object.
-    {
-        return Physics2D.OverlapCircle(targetPos, 0.15f, solidObjectsLayer) == null;
+        Vector3 temp = player.transform.position;
+        temp.x = -10;
+        transform.position = temp;
     }
 }

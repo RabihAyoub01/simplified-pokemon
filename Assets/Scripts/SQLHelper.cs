@@ -204,5 +204,10 @@ namespace SQLHelper
         {
             return GetReaderFromQuery($"SELECT ItemName  FROM Items NATURAL JOIN hasItem WHERE username='{username}';");
         }
+
+        public static MySqlDataReader GetItemsInShop(string regionName)
+        {
+            return GetReaderFromQuery($"SELECT T.* FROM itemSoldIn S NATURAL JOIN Items T WHERE regionName='{regionName}'");
+        }
     }
 }
