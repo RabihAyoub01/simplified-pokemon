@@ -22,7 +22,7 @@ public class ShopWindow : MonoBehaviour
         
     }
 
-    void OnShopWindowPanel()
+    void  OnShopWindowPanel()
     {
         DestroyChildren(shopContent);
         LoadItems();
@@ -81,7 +81,7 @@ public class ShopWindow : MonoBehaviour
         LoadWallet();
     }
 
-    private void GiveUsernameItems(string itemName, int amountToBuy)
+    private  void GiveUsernameItems(string itemName, int amountToBuy)
     {
         string username = PlayerController.GetInstanceUsername();
 
@@ -98,7 +98,7 @@ public class ShopWindow : MonoBehaviour
             SQLConnector.updateItemOwned(username, itemName, amountInBag + amountToBuy);
         else 
             SQLConnector.InsertItemToPlayer(username, itemName, amountToBuy);
-    }
+    }   
 
     private void AddShopRow(string itemName, string itemPrice)
     {

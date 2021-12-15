@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(true);
             transform.position = new Vector3(9.5f, 0.8f, 0);
         }
-
+        
         isMoving = false;
     }
 

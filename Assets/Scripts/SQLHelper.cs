@@ -182,10 +182,7 @@ namespace SQLHelper
             ExecuteQuery($"INSERT INTO trainer VALUES('{trainerID}', '{level}');");
         }
 
-        public static void PickUp(string userID, string itemName, int quantity)
-        {
-            ExecuteQuery($"INSERT INTO hasItem VALUES('{userID}', '{itemName}',{quantity} );");
-        }
+       
         
         
         /// <summary>
