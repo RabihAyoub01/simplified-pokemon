@@ -121,7 +121,6 @@ public class ShopWindow : MonoBehaviour
 
         if (amountInBag > 0)
         {
-            Debug.Log("ran");
             SQLConnector.updateItemOwned(username, itemName, amountInBag + amountToBuy);
         }
         else 
