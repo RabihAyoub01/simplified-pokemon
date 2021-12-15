@@ -81,8 +81,6 @@ public class PlayerController : MonoBehaviour
         }
         transform.position = targetPos;
 
-        Debug.Log($"{transform.position.x}, {transform.position.y}");
-
         if (transform.position.x == 9.5f && transform.position.y == 0.8f)
         {
             transform.position = new Vector3(17.5f, 23.8f, 0);
