@@ -28,9 +28,7 @@ public class Pickup : MonoBehaviour, Interactable
     }
     public void Interact()
     {
-        
-        
-       GiveUsernameItems(gameObject.name, 1);
+        GiveUsernameItems(gameObject.name, 1);
         Destroy(gameObject);
         
     }

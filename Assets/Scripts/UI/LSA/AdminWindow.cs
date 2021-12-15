@@ -60,6 +60,12 @@ public class AdminWindow : MonoBehaviour
                 numOfAttributes = 7;
                 break;
 
+            case "PokemonCopy":
+                reader = SQLConnector.GetPokemonCopyReader(entityName);
+
+                numOfAttributes = 4;
+                break;
+
             case "Item":
                 reader = SQLConnector.GetItemReader(entityName);
 
@@ -76,6 +82,18 @@ public class AdminWindow : MonoBehaviour
                 reader = SQLConnector.GetRegionReader(entityName);
 
                 numOfAttributes = 3;
+                break;
+
+            case "Trainer":
+                reader = SQLConnector.GetTrainerReader(entityName);
+
+                numOfAttributes = 4;
+                break;
+
+            case "Shop":
+                reader = SQLConnector.GetShopReader(entityName);
+
+                numOfAttributes = 1;
                 break;
 
             default:
@@ -133,6 +151,25 @@ public class AdminWindow : MonoBehaviour
 
                 break;
 
+            case "PokemonCopy":
+                if (insertToggle.isOn)  // tests if the insert Toggle is selected
+                {
+                    Debug.Log("Tried to insert PokemonCopy");
+                    SQLConnector.InsertPokemonCopy(inputFields[0].text, int.Parse(inputFields[1].text), int.Parse(inputFields[2].text), inputFields[3].text);
+                }
+                else if (updateToggle.isOn)  // tests if the update Toggle is selected
+                {
+                    Debug.Log("Tried to update PokemonCopy");
+                    SQLConnector.updatePokemonCopy(inputFields[0].text, int.Parse(inputFields[1].text), int.Parse(inputFields[2].text), inputFields[3].text);
+                }
+                else  // means Delete is selected
+                {
+                    Debug.Log("Tried to delete PokemonCopy");
+                    SQLConnector.removePokemonCopy(inputFields[0].text);
+                }
+
+                break;
+
             case "Item":
                 if (insertToggle.isOn)  // tests if the insert Toggle is selected
                 {
@@ -184,6 +221,42 @@ public class AdminWindow : MonoBehaviour
                 {
                     Debug.Log("Tried to delete Region");
                     SQLConnector.removeRegion(inputFields[0].text);
+                }
+                break;
+
+            case "Trainer":
+                if (insertToggle.isOn)  // tests if the insert Toggle is selected
+                {
+                    Debug.Log("Tried to insert Trainer");
+                    SQLConnector.InsertTrainer(inputFields[0].text, int.Parse(inputFields[2].text), inputFields[3].text);
+                }
+                else if (updateToggle.isOn)  // tests if the update Toggle is selected
+                {
+                    Debug.Log("Tried to update Trainer");
+                    SQLConnector.updateTrainer(inputFields[0].text, inputFields[1].text, int.Parse(inputFields[2].text), inputFields[3].text);
+                }
+                else  // means Delete is selected
+                {
+                    Debug.Log("Tried to delete Trainer");
+                    SQLConnector.removeTrainer(inputFields[0].text);
+                }
+                break;
+
+            case "Shop":
+                if (insertToggle.isOn)  // tests if the insert Toggle is selected
+                {
+                    Debug.Log("Tried to insert Shop");
+                    SQLConnector.InsertShop(inputFields[0].text);
+                }
+                else if (updateToggle.isOn)  // tests if the update Toggle is selected
+                {
+                    Debug.Log("Tried to update Shop");
+                    SQLConnector.updateShop(inputFields[0].text);
+                }
+                else  // means Delete is selected
+                {
+                    Debug.Log("Tried to delete Shop");
+                    SQLConnector.removeShop(inputFields[0].text);
                 }
                 break;
 

@@ -167,6 +167,21 @@ namespace SQLHelper
             ExecuteQuery($"DELETE FROM Region WHERE regionName='{regionName}';");
         }
 
+        public static void InsertPokemonCopy(string pokemonID, int pokemonLevel, int hitpoints, string pokemonName)
+        {
+            ExecuteQuery($"INSERT INTO pokemonCopy VALUES('{pokemonID}', {pokemonLevel}, {hitpoints}, '{pokemonName}');");
+        }
+
+        public static void updatePokemonCopy(string pokemonID, int pokemonLevel, int hitpoints, string pokemonName)
+        {
+            ExecuteQuery($"UPDATE pokemonCopy SET pokemonID='{pokemonID}', pokemonLevel={pokemonLevel}, hitpoints={hitpoints}, pokemonName='{pokemonName}'; ");
+        }
+
+        public static void removePokemonCopy(string pokemonID)
+        {
+            ExecuteQuery($"DELETE FROM pokemonCopy WHERE pokemonID='{pokemonID}';");
+        }
+
         public static void InsertItems(string itemName, int itemPrice, string effect)
         {
             ExecuteQuery($"INSERT INTO Items VALUES('{itemName}', '{itemPrice}','{effect}');");
@@ -179,12 +194,21 @@ namespace SQLHelper
 
         public static void InsertTrainer(string trainerID, int level, string name)
         {
-            ExecuteQuery($"INSERT INTO trainer VALUES('{trainerID}', '{level}');");
+            ExecuteQuery($"INSERT INTO trainer VALUES('{trainerID}', '{level}', '{name}');");
         }
 
-       
-        
-        
+        public static void updateTrainer(string trainerID, string trainerName, int trainerLevel, string pokemonID)
+        {
+            ExecuteQuery($"UPDATE Trainer SET trainerID='{trainerID}', trainerName='{trainerName}', trainerLevel = '{trainerLevel}', pokemonID = '{pokemonID}'; ");
+        }
+        public static void removeTrainer(string trainerID)
+        {
+            ExecuteQuery($"DELETE FROM Trainer WHERE trainerID='{trainerID}';");
+        }
+
+
+
+
         /// <summary>
         /// Gets a list of all the usernames in the table.
         /// </summary>
@@ -213,6 +237,11 @@ namespace SQLHelper
             return GetReaderFromQuery($"SELECT * FROM pokemon WHERE pokemonName='{pokemonName}';"); 
         }
 
+        public static MySqlDataReader GetPokemonCopyReader(string pokemonID)
+        {
+            return GetReaderFromQuery($"SELECT * FROM pokemonCopy WHERE pokemonID='{pokemonID}';");
+        }
+
         public static MySqlDataReader GetItemReader(string itemName)
         {
             return GetReaderFromQuery($"SELECT * FROM Items WHERE ItemName='{itemName}';"); 
@@ -227,6 +256,18 @@ namespace SQLHelper
         {
             return GetReaderFromQuery($"SELECT * FROM Region WHERE regionName='{regionName}' ;");
         }
+        public static MySqlDataReader GetTrainerReader(string trainerID)
+        {
+            return GetReaderFromQuery($"SELECT * FROM Trainer WHERE trainerID='{trainerID}' ;");
+        }
+
+        public static MySqlDataReader GetShopReader(string shopID)
+        {
+            return GetReaderFromQuery($"SELECT * FROM Shop WHERE shopID='{shopID}' ;");
+        }
+
+
+
 
         /// <summary>
         /// This method returns a null value for MySqlDataReader.
@@ -248,8 +289,7 @@ namespace SQLHelper
 
         public static MySqlDataReader GetPokemonIDReader(string region)
         {
-            
-            return GetReaderFromQuery($"SELECT pokemonID FROM hasPokemon NATURAL JOIN Region NATURAL JOIN pokemonCopy WHERE Region.regionName='{region}';");
+            return GetReaderFromQuery($"SELECT pokemonID FROM hasPokemon NATURAL JOIN Region NATURAL JOIN pokemonCopy WHERE Region.regionName='{region}' ORDER BY RAND() lIMIT 1;");
         }
 
         public static MySqlDataReader CheckIfOwnedReader(string username)
@@ -266,6 +306,21 @@ namespace SQLHelper
         {
             return GetReaderFromQuery($"SELECT * FROM pokemonCopy S NATURAL JOIN pokemon T WHERE username='{username}'");
         }
-    }
 
-}
+        public static void InsertShop(string shopID)
+        {
+             ExecuteQuery($"INSERT INTO Shop VALUES('{shopID}');");
+        }
+
+            public static void updateShop(string shopID)
+            {
+                ExecuteQuery($"UPDATE Shop SET shopID='{shopID}'; ");
+            }
+            public static void removeShop(string shopID)
+            {
+                ExecuteQuery($"DELETE FROM Shop WHERE shopID='{shopID}';");
+            }
+
+        }
+
+    }

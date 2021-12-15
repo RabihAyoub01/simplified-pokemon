@@ -6862,11 +6862,17 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Pokemon
       m_Image: {fileID: 0}
-    - m_Text: Item
+    - m_Text: PokemonCopy
       m_Image: {fileID: 0}
     - m_Text: Ability
       m_Image: {fileID: 0}
+    - m_Text: Item
+      m_Image: {fileID: 0}
     - m_Text: Region
+      m_Image: {fileID: 0}
+    - m_Text: Trainer
+      m_Image: {fileID: 0}
+    - m_Text: Shop
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
