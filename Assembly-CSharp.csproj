@@ -59,18 +59,20 @@
     <Compile Include="Assets\Scripts\SQLHelper.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\Scripts\Player\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Player\UI\PokemonRowPrefab.cs" />
+    <Compile Include="Assets\Scripts\Player\UI\ShopRowPrefabScript.cs" />
     <Compile Include="Assets\Scripts\UI\LSA\CanvasMethods.cs" />
     <Compile Include="Assets\Scripts\PlayerInteract.cs" />
     <Compile Include="Assets\Scripts\Player\UI\PauseWindow.cs" />
     <Compile Include="Assets\Scripts\UI\LSA\LoginWindow.cs" />
     <Compile Include="Assets\Scripts\Player\UI\GameCanvas.cs" />
+    <Compile Include="Assets\Scripts\Player\UI\ShopWindow.cs" />
     <Compile Include="Assets\Scripts\UI\LSA\SignUpWindow.cs" />
     <Compile Include="Assets\Scripts\UI\LSA\AdminWindow.cs" />
     <Compile Include="Assets\Scripts\Player\UI\BagWindow.cs" />
     <Compile Include="Assets\Scripts\IntObject.cs" />
-    <Compile Include="Assets\Scripts\Player\UI\ShopRowPrefabScript.cs" />
-    <Compile Include="Assets\Scripts\Player\UI\ShopWindow.cs" />
-    <Compile Include="Assets\Scripts\Player\UI\PokemonRowPrefab.cs" />
+    <Compile Include="Assets\Scripts\Game\DialogueManager.cs" />
+    <Compile Include="Assets\Scripts\Player\UI\PokemonWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

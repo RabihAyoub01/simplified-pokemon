@@ -99,7 +99,7 @@ namespace SQLHelper
         /// <param name="password">Password String of the new account.</param>
         public static void InsertAccount(string username, string password)
         {
-            ExecuteQuery($"INSERT INTO account VALUES('{username}', '{password}');");
+            ExecuteQuery($"INSERT INTO account VALUES('{username}', '{password}', {1000});");
         }
 
 
@@ -128,9 +128,19 @@ namespace SQLHelper
             ExecuteQuery($"UPDATE pokemon SET itemPrice='{itemPrice}', effect='{effect}'; ");
         }
 
+        public static void updateItemOwned(string username, string itemName, int newQuantity)
+        {
+            ExecuteQuery($"UPDATE hasItem SET quantity='{newQuantity}' WHERE username='{username}';");
+        }
+
         public static void updateAbility(string abilityName, string abilityType)
         {
             ExecuteQuery($"UPDATE Ability SET abilityName='{abilityName}', abilityType='{abilityType}'; ");
+        }
+
+        public static void updateBalance(string username, int coins)
+        {
+            ExecuteQuery($"UPDATE account SET coins='{coins}' WHERE username='{username}';");
         }
 
         public static void removeAbility(string abilityName)
@@ -161,7 +171,12 @@ namespace SQLHelper
         {
             ExecuteQuery($"INSERT INTO Items VALUES('{itemName}', '{itemPrice}','{effect}');");
         }
-       
+
+        public static void InsertItemToPlayer(string username, string itemName, int quantity)
+        {
+            ExecuteQuery($"INSERT INTO hasItem VALUES('{username}', '{itemName}','{quantity}');");
+        }
+
         public static void InsertTrainer(string trainerID, int level, string name)
         {
             ExecuteQuery($"INSERT INTO trainer VALUES('{trainerID}', '{level}');");
@@ -245,9 +260,14 @@ namespace SQLHelper
             return GetReaderFromQuery($"SELECT ItemName  FROM Items NATURAL JOIN hasItem WHERE username='{username}';");
         }
 
-        public static MySqlDataReader GetItemsInShop(string regionName)
+        public static MySqlDataReader GetItemsInShop(string shopID)
         {
-            return GetReaderFromQuery($"SELECT T.* FROM itemSoldIn S NATURAL JOIN Items T WHERE regionName='{regionName}'");
+            return GetReaderFromQuery($"SELECT T.* FROM itemSoldIn S NATURAL JOIN Items T WHERE shopID='{shopID}'");
+        }
+
+        public static MySqlDataReader GetPokemonOwnedBy(string username)
+        {
+            return GetReaderFromQuery($"SELECT * FROM pokemonCopy S NATURAL JOIN pokemon T WHERE username='{username}'");
         }
     }
 

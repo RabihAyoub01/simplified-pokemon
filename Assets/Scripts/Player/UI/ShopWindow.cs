@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using SQLHelper;
 
 public class ShopWindow : MonoBehaviour
 {
     public GameObject shopContent;
-    public string regionName;
+    public Text walletText;
+    public string shopID;
     public ShopRowPrefabScript rowPrefab;
     // Start is called before the first frame update
     void Start()
     {
-        OnShopWindowPanel();
+
     }
 
     // Update is called once per frame
@@ -24,6 +26,7 @@ public class ShopWindow : MonoBehaviour
     {
         DestroyChildren(shopContent);
         LoadItems();
+        LoadWallet();
     }
 
     private void DestroyChildren(GameObject panel)
@@ -36,7 +39,7 @@ public class ShopWindow : MonoBehaviour
 
     public void LoadItems()
     {
-        using (var reader = SQLConnector.GetItemsInShop(regionName))
+        using (var reader = SQLConnector.GetItemsInShop(shopID))
         {
             while (reader.Read())
             {
@@ -45,9 +48,61 @@ public class ShopWindow : MonoBehaviour
         }
     }
 
+    public void LoadWallet()
+    {
+        string username = PlayerController.GetInstanceUsername();
+
+        using (var reader = SQLConnector.GetAccountReader(username))
+        {
+            if (reader.Read())
+            {
+                walletText.text = $"{reader.GetInt16("coins")}";
+            }
+        }
+    }
+
+    public void BuyButtonPressed()
+    {
+        string username = PlayerController.GetInstanceUsername();
+
+        ShopRowPrefabScript[] rows = shopContent.GetComponentsInChildren<ShopRowPrefabScript>();
+        int sum = 0;
+        foreach (ShopRowPrefabScript row in rows)
+        {
+            int amountToBuy = int.Parse(row.GetComponentInChildren<InputField>().text);
+            if (amountToBuy > 0) {
+                Text[] textLabels = row.GetComponentsInChildren<Text>();
+
+                sum += amountToBuy * int.Parse(textLabels[1].text);
+                GiveUsernameItems(textLabels[0].text, amountToBuy);
+            }
+        }
+        SQLConnector.updateBalance(username, int.Parse(walletText.text) - sum);
+        LoadWallet();
+    }
+
+    private void GiveUsernameItems(string itemName, int amountToBuy)
+    {
+        string username = PlayerController.GetInstanceUsername();
+
+        int amountInBag = 0;
+
+        using (var reader = SQLConnector.GetItemsOwnedReader(username))
+        {
+            while (reader.Read())
+                if (reader.GetString("itemName") == itemName)
+                    amountInBag = int.Parse(reader.GetString("quantity"));
+        }
+
+        if (amountInBag > 0)
+            SQLConnector.updateItemOwned(username, itemName, amountInBag + amountToBuy);
+        else 
+            SQLConnector.InsertItemToPlayer(username, itemName, amountToBuy);
+    }
+
     private void AddShopRow(string itemName, string itemPrice)
     {
-        ShopRowPrefabScript row =  Instantiate(rowPrefab);
+        ShopRowPrefabScript row = Instantiate(rowPrefab);
         row.Setup(itemName, itemPrice);
         row.transform.SetParent(shopContent.transform, false);
     }

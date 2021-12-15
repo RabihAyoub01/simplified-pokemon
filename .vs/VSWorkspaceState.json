@@ -3,8 +3,10 @@
     "",
     "\\Assets",
     "\\Assets\\Scripts",
-    "\\Assets\\Scripts\\Player"
+    "\\Assets\\Scripts\\Game",
+    "\\Assets\\Scripts\\Player",
+    "\\Assets\\Scripts\\Player\\UI"
   ],
-  "SelectedNode": "\\Assets\\Scripts\\Player\\PlayerController.cs",
+  "SelectedNode": "\\simplified-pokemon.sln",
   "PreviewInSolutionExplorer": false
 }

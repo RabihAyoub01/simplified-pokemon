@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ShopRowPrefabScript : MonoBehaviour
 {
 
-    public Text itemName; 
+    public Text itemName;
     public Text itemPrice; 
     public Button decrementQtyBtn; 
     public Button incrementQtyBtn;
@@ -38,6 +38,7 @@ public class ShopRowPrefabScript : MonoBehaviour
 
     public void DecrementTF()
     {
-        qtyTF.text = int.Parse(qtyTF.text) + 1 + "";
+        if (int.Parse(qtyTF.text) > 0)
+            qtyTF.text = int.Parse(qtyTF.text) - 1 + "";
     }
 }

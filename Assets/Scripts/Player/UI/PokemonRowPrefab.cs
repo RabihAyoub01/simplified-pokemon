@@ -30,13 +30,13 @@ public class PokemonRowPrefab : MonoBehaviour
         string type2, int baseATK, int baseDEF, int baseSPD)
     {
         this.pokemonName.text = pokemonName;
-        this.pokemonLevel.text = pokemonLevel;
+        this.pokemonLevel.text = $"Lvl {pokemonLevel}";
         hpSlider.value = ((float) currentHP) / baseHP;
         this.type1.text = type1;
         this.type2.text = type2;
-        pokemonHP.text = $"{currentHP} / {baseHP}";
-        pokemonATK.text = baseATK + "";
-        pokemonDEF.text = baseDEF + "";
-        pokemonSPD.text = baseDEF + "";
+        pokemonHP.text = $"{currentHP} / {baseHP} hp";
+        pokemonATK.text = $"ATK: {baseATK}";
+        pokemonDEF.text = $"DEF: {baseDEF}";
+        pokemonSPD.text = $"SPD: {baseSPD}";
     }
 }
