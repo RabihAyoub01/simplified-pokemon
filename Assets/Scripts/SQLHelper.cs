@@ -121,7 +121,7 @@ namespace SQLHelper
         public static void updatePokemon(string pokemonName, string type1, string type2, int baseHP, int baseATK, int baseDEF, int baseSPD)
         {
             ExecuteQuery($"UPDATE pokemon SET type1='{type1}', type2='{type2}', baseHP='{baseHP}', baseATK='{baseATK}', baseDEF='{baseDEF}', baseSPD='{baseSPD}' WHERE pokemonName='{pokemonName}'; ");
-        }
+        } // 
 
         public static void updateItems(string itemName, int itemPrice, string effect)
         {
