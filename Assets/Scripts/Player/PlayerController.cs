@@ -80,22 +80,26 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
         transform.position = targetPos;
-        
-        Debug.Log($"{transform.position.x} {transform.position.y}");
-        Debug.Log($"{targetPos.x} {targetPos.y}");
+
+        Debug.Log($"{transform.position.x}, {transform.position.y}");
 
         if (transform.position.x == 9.5f && transform.position.y == 0.8f)
         {
-            Debug.Log(true);
             transform.position = new Vector3(17.5f, 23.8f, 0);
         }
 
         if (transform.position.x == 18.5f && transform.position.y == 22.8f)
         {
-            Debug.Log(true);
             transform.position = new Vector3(9.5f, 0.8f, 0);
         }
         
+        if (transform.position.x > 16.5f && transform.position.x < 19.5f && transform.position.y > 26.8f && transform.position.y < 29.8f)
+        {
+            ShopWindow gameobject = GetComponent<ShopWindow>();
+            gameobject.OnShopWindowPanel();
+        }
+
+
         isMoving = false;
     }
 

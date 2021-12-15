@@ -6,8 +6,6 @@ using MySql.Data.MySqlClient;
 
 public class Pickup : MonoBehaviour, Interactable
 {
-    
-
     private void GiveUsernameItems(string itemName, int amountToBuy)
     {
         string username = PlayerController.GetInstanceUsername();
@@ -28,8 +26,8 @@ public class Pickup : MonoBehaviour, Interactable
     }
     public void Interact()
     {
+        Debug.Log("Helo W");
         GiveUsernameItems(gameObject.name, 1);
         Destroy(gameObject);
-        
     }
 }

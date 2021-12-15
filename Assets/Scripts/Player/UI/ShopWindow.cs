@@ -7,9 +7,19 @@ using SQLHelper;
 public class ShopWindow : MonoBehaviour
 {
     public GameObject shopContent;
+    public GameObject shopPanel;
     public Text walletText;
     public string shopID;
     public ShopRowPrefabScript rowPrefab;
+
+    public static ShopWindow instance;
+
+    private void Awake()
+    {
+        Debug.Log("Shop initiated");
+        if (instance == null) { instance = this; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,11 +32,22 @@ public class ShopWindow : MonoBehaviour
         
     }
 
-    void  OnShopWindowPanel()
+    public static void createInstance()
     {
+
+    }
+
+    public void OnShopWindowPanel()
+    {
+        shopPanel.SetActive(true);
         DestroyChildren(shopContent);
         LoadItems();
         LoadWallet();
+    }
+
+    public void closeShopPanel()
+    {
+        shopPanel.SetActive(false);
     }
 
     private void DestroyChildren(GameObject panel)
@@ -81,7 +102,7 @@ public class ShopWindow : MonoBehaviour
         LoadWallet();
     }
 
-    private  void GiveUsernameItems(string itemName, int amountToBuy)
+    private void GiveUsernameItems(string itemName, int amountToBuy)
     {
         string username = PlayerController.GetInstanceUsername();
 
@@ -90,14 +111,23 @@ public class ShopWindow : MonoBehaviour
         using (var reader = SQLConnector.GetItemsOwnedReader(username))
         {
             while (reader.Read())
+            {
                 if (reader.GetString("itemName") == itemName)
+                {
                     amountInBag = int.Parse(reader.GetString("quantity"));
+                }
+            }
         }
 
         if (amountInBag > 0)
+        {
+            Debug.Log("ran");
             SQLConnector.updateItemOwned(username, itemName, amountInBag + amountToBuy);
+        }
         else 
+        {
             SQLConnector.InsertItemToPlayer(username, itemName, amountToBuy);
+        }
     }   
 
     private void AddShopRow(string itemName, string itemPrice)

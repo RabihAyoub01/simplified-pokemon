@@ -130,7 +130,7 @@ namespace SQLHelper
 
         public static void updateItemOwned(string username, string itemName, int newQuantity)
         {
-            ExecuteQuery($"UPDATE hasItem SET quantity='{newQuantity}' WHERE username='{username}';");
+            ExecuteQuery($"UPDATE hasItem SET quantity='{newQuantity}' WHERE username='{username}' AND itemName = '{itemName}' ;");
         }
 
         public static void updateAbility(string abilityName, string abilityType)
@@ -312,14 +312,14 @@ namespace SQLHelper
              ExecuteQuery($"INSERT INTO Shop VALUES('{shopID}');");
         }
 
-            public static void updateShop(string shopID)
-            {
-                ExecuteQuery($"UPDATE Shop SET shopID='{shopID}'; ");
-            }
-            public static void removeShop(string shopID)
-            {
-                ExecuteQuery($"DELETE FROM Shop WHERE shopID='{shopID}';");
-            }
+        public static void updateShop(string shopID)
+        {
+            ExecuteQuery($"UPDATE Shop SET shopID='{shopID}'; ");
+        }
+        public static void removeShop(string shopID)
+        {
+            ExecuteQuery($"DELETE FROM Shop WHERE shopID='{shopID}';");
+        }
 
         }
 
