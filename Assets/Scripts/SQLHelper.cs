@@ -8,8 +8,7 @@ using Random = System.Random;
 namespace SQLHelper
 {
     class SQLConnector
-    {
-        static string connectionString = "server=remotemysql.com; uid=cII0ueGbDG;pwd=ryECGbgBjf;database=cII0ueGbDG";
+    { 
         static MySqlConnection conn = new MySqlConnection();
         static MySqlCommand cmd = new MySqlCommand();  // this is a "cursor" that edits data
         
@@ -27,6 +26,9 @@ namespace SQLHelper
         /// </summary>
         private void ConnectDB()
         {
+            string connectionPassword = Environment.GetEnvironmentVariable("SimplifiedPokemonDBpswd");
+            string connectionString = $"server=remotemysql.com; uid=cII0ueGbDG;pwd={connectionPassword};database=cII0ueGbDG";
+
             conn.ConnectionString = connectionString;
             cmd.Connection = conn;  // connects this cmd instance to the connectino we've established
             try
