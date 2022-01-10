@@ -26,7 +26,7 @@ public class Pickup : MonoBehaviour, Interactable
     }
     public void Interact()
     {
-        Debug.Log("Helo W");
+        Debug.Log("Item Picked");
         GiveUsernameItems(gameObject.name, 1);
         Destroy(gameObject);
     }
